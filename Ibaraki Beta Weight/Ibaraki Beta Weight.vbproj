@@ -105,6 +105,7 @@
     </Compile>
     <Compile Include="Script\Common.vb" />
     <Compile Include="Script\Constant.vb" />
+    <Compile Include="Script\Service.vb" />
     <Compile Include="Script\Util.vb" />
   </ItemGroup>
   <ItemGroup>

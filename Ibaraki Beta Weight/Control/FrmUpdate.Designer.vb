@@ -35,6 +35,9 @@ Partial Class FrmUpdate
         CType(Me.picUpdating, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
+        'tmrMain
+        '
+        '
         'pnlMain
         '
         Me.pnlMain.BackColor = System.Drawing.Color.White
@@ -116,7 +119,7 @@ Partial Class FrmUpdate
         Me.lblCapacity.Text = "0 MB / 0 MB"
         Me.lblCapacity.TextAlign = System.Drawing.ContentAlignment.BottomCenter
         '
-        'UpdateFrm
+        'FrmUpdate
         '
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None
         Me.BackColor = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
@@ -128,7 +131,8 @@ Partial Class FrmUpdate
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "UpdateFrm"
+        Me.Name = "FrmUpdate"
+        Me.Opacity = 0R
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Updating..."

@@ -147,9 +147,9 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to WUFOIOiMqOWfjiAo44OZ44K/KSDph43ph48=.
         '''</summary>
-        Friend ReadOnly Property key_serial() As String
+        Friend ReadOnly Property key_ser() As String
             Get
-                Return ResourceManager.GetString("key_serial", resourceCulture)
+                Return ResourceManager.GetString("key_ser", resourceCulture)
             End Get
         End Property
         
