@@ -23,7 +23,7 @@ Public Module ModuleMain
         Dim t As String
 
         ' 2t
-        Dim is2t = YSQ("運賃(2トン車): ")
+        Dim is2t = YNQ("運賃(2トン車): ")
         If is2t = 1 Then
             DctVal(xlApp, "BA241", is2t)
         End If
@@ -31,779 +31,101 @@ Public Module ModuleMain
         PrefWarn("外周/内周GL-150")
         GL50(xlApp)
         ' GL-300
-        If YSQ("外周深GL-300: ") = 1 Then
+        If YNQ("外周深GL-300: ") = 1 Then
             GL300(xlApp)
         End If
         ' GL-300/+30
-        If YSQ("外周深GL-300/+30: ") = 1 Then
+        If YNQ("外周深GL-300/+30: ") = 1 Then
             GL300Cut(xlApp)
         End If
         ' GL-400
-        If YSQ("外周深GL-400: ") = 1 Then
+        If YNQ("外周深GL-400: ") = 1 Then
             GL400(xlApp)
         End If
         ' GL-400/+30
-        If YSQ("外周深GL-400/+30: ") = 1 Then
+        If YNQ("外周深GL-400/+30: ") = 1 Then
             GL400Cut(xlApp)
         End If
         ' Garage GL-300
-        If YSQ("ガレージ外周GL-300: ") = 1 Then
+        If YNQ("ガレージ外周GL-300: ") = 1 Then
             GL300Gar(xlApp)
         End If
-        ' Slap unit
+        ' Slab unit
         PrefWarn("スラブユニット")
-        SlapUnit(xlApp)
+        SlabUnit(xlApp)
         ' Electric water
-        PrefImp("電気温水器: ")
-        Dim elecWtr = Val(ReadLine)
+        Dim elecWtr = HdrInp("電気温水器: ")
         If elecWtr > 0 Then
             DctVal(xlApp, "BA107", elecWtr)
         Else
             ClrVal(xlApp, "BA107")
         End If
-        ' Corner
+        ' Corner joint
         PrefWarn("コーナー")
-        Corner(xlApp)
-        ' Straight
+        JtCor(xlApp)
+        ' Straight joint
         PrefWarn("ストレート")
-        Straight(xlApp)
+        JtStr(xlApp)
         ' Cap tire
-        If YSQ("キャップタイヤ (320): ") = 1 Then
+        If YNQ("キャップタイヤ (320): ") = 1 Then
             CapTire(xlApp)
         End If
         ' Edge
-        ImpVal(xlApp, "端部(700×350): ", "BA180")
+        PubVal(xlApp, "BA180", HdrInp("端部(700×350): "))
         ' Long corner
-        If YSQ("ロングコーナー (D16): ") = 1 Then
-            LongCorner(xlApp)
+        If YNQ("ロングコーナー (D16): ") = 1 Then
+            LongCor(xlApp)
+        End If
+        ' Crank
+        If YNQ("クランク: ") = 1 Then
+            Crank(xlApp)
+        End If
+        ' Island
+        If YNQ("島 (D16): ") = 1 Then
+            Island(xlApp)
+        End If
+        ' Straight
+        If YNQ("ストレート (D16): ") = 1 Then
+            Straight(xlApp)
+        End If
+        ' Haunch
+        PubVal(xlApp, "BA180", HdrInp("ハンチ (D16[660×410×660]): "))
+        ' Corner 3
+        If YNQ("コーナー3 (D16): ") = 1 Then
+            Corner3(xlApp)
+        End If
+        ' Crank 3
+        If YNQ("クランク3 (D16): ") = 1 Then
+            Crank3(xlApp)
+        End If
+        ' U type 3
+        If YNQ("コ型3 (D16): ") = 1 Then
+            UType3(xlApp)
+        End If
+        ' M type
+        PubModVal(xlApp, "195", "350×460×460×350", 2.7, HdrInpDesc("M型 (D16[350×460×460×350]) ", "[2.7]: "))
+        ' hook
+        PrefWarn("フック (D10)")
+        PubModVal(xlApp, "192", "695×160　　フック付", 0.6, DtlInpRipDesc("695×160 ", "[0.6]: "))
+        PubModVal(xlApp, "193", "595×160　　フック付", 0.5, DtlInpRipDesc("595×160 ", "[0.5]: "))
+        PubModVal(xlApp, "194", "160×160　　フック付", 0.3, DtlInpRipDesc("160×160 ", "[0.3]: "))
+        PubVal(xlApp, "BA185", DtlInpRip("435×250: "))
+        ' Main reinforcement
+        If YNQ("主筋補強 (D10): ") = 1 Then
+            MainReinf(xlApp)
+        End If
+        ' Bending
+        If YNQ("スラブ曲 (D13): ") = 1 Then
+            SlabBndg(xlApp)
+        End If
+        ' Slab straight
+        PrefWarn("スラブ直 (D13)")
+        SlabStr(xlApp)
+        ' Slab reinforcement bending
+        If YNQ("スラブ補強曲 (D10): ") = 1 Then
+            SlabReinfBndg(xlApp)
         End If
 
-        Info()
-        Console.ForegroundColor = ConsoleColor.Yellow
-        Console.Write(vbTab & vbTab & "クランク: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp <> 0 Or temp <> 1 Then
-            Do Until temp = 0 Or temp = 1
-                Info()
-                Console.ForegroundColor = ConsoleColor.Yellow
-                Console.Write(vbTab & vbTab & "クランク: ")
-                Console.ForegroundColor = ConsoleColor.Red
-                temp = Val(Console.ReadLine)
-            Loop
-        End If
-        If temp = 1 Then
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "D16 (750×920×750): ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA171").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "D10 (500×920×500): ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA172").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "D16 (750×460×750): ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA173").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "D10 (500×460×500): ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA174").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-        End If
-
-        Info()
-        Console.ForegroundColor = ConsoleColor.Yellow
-        Console.Write(vbTab & vbTab & "島 (D16): ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp <> 0 Or temp <> 1 Then
-            Do Until temp = 0 Or temp = 1
-                Info()
-                Console.ForegroundColor = ConsoleColor.Yellow
-                Console.Write(vbTab & vbTab & "島 (D16): ")
-                Console.ForegroundColor = ConsoleColor.Red
-                temp = Val(Console.ReadLine)
-            Loop
-        End If
-        If temp = 1 Then
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "350×930×350: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA176").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "350×470×350: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA175").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-        End If
-
-        Info()
-        Console.ForegroundColor = ConsoleColor.Yellow
-        Console.Write(vbTab & vbTab & "ストレート (D16): ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp <> 0 Or temp <> 1 Then
-            Do Until temp = 0 Or temp = 1
-                Info()
-                Console.ForegroundColor = ConsoleColor.Yellow
-                Console.Write(vbTab & vbTab & "ストレート (D16): ")
-                Console.ForegroundColor = ConsoleColor.Red
-                temp = Val(Console.ReadLine)
-            Loop
-        End If
-        If temp = 1 Then
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "4000 ")
-            Console.ForegroundColor = ConsoleColor.Magenta
-            Console.Write("[6.3(66)]: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("AH169").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = "4000"
-                xlApp.Range("CM169").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = 6.3
-                xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-                xlApp.Range("CQ169").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = 66
-                xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-                xlApp.Range("BA169").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "3500 ")
-            Console.ForegroundColor = ConsoleColor.Magenta
-            Console.Write("[5.5(66)]: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("AH170").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = "3500"
-                xlApp.Range("CM170").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = 5.5
-                xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-                xlApp.Range("CQ170").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = 66
-                xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-                xlApp.Range("BA170").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "3000: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA182").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "2500: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA183").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "2000: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA184").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-        End If
-
-        Info()
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & vbTab & "ハンチ (D16[660×410×660]): ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA186").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-
-        Info()
-        Console.ForegroundColor = ConsoleColor.Yellow
-        Console.Write(vbTab & vbTab & "コーナー3 (D16): ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp <> 0 Or temp <> 1 Then
-            Do Until temp = 0 Or temp = 1
-                Info()
-                Console.ForegroundColor = ConsoleColor.Yellow
-                Console.Write(vbTab & vbTab & "コーナー3 (D16): ")
-                Console.ForegroundColor = ConsoleColor.Red
-                temp = Val(Console.ReadLine)
-            Loop
-        End If
-        If temp = 1 Then
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "右(750×460×350): ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA166").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "左(750×460×350): ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA168").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "右(750×240×350) ")
-            Console.ForegroundColor = ConsoleColor.Magenta
-            Console.Write("[2.2]: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("AH187").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = "750×240×350"
-                xlApp.Range("CM187").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = 2.2
-                xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-                xlApp.Range("BA187").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "左(750×240×350) ")
-            Console.ForegroundColor = ConsoleColor.Magenta
-            Console.Write("[2.2]: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("AH190").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = "750×240×350"
-                xlApp.Range("CM190").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = 2.2
-                xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-                xlApp.Range("BA190").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-        End If
-
-        Info()
-        Console.ForegroundColor = ConsoleColor.Yellow
-        Console.Write(vbTab & vbTab & "クランク3 (D16): ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp <> 0 Or temp <> 1 Then
-            Do Until temp = 0 Or temp = 1
-                Info()
-                Console.ForegroundColor = ConsoleColor.Yellow
-                Console.Write(vbTab & vbTab & "クランク3 (D16): ")
-                Console.ForegroundColor = ConsoleColor.Red
-                temp = Val(Console.ReadLine)
-            Loop
-        End If
-        If temp = 1 Then
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "右(750×460×460×350) ")
-            Console.ForegroundColor = ConsoleColor.Magenta
-            Console.Write("[3.3]: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("AH189").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = "750×460×460×350"
-                xlApp.Range("CM189").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = 3.3
-                xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-                xlApp.Range("BA189").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "左(750×460×460×350) ")
-            Console.ForegroundColor = ConsoleColor.Magenta
-            Console.Write("[3.3]: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("X188").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = "（クランク３左）"
-                xlApp.Range("AH188").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = "750×460×460×350"
-                xlApp.Range("CM188").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = 3.3
-                xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-                xlApp.Range("BA188").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-        End If
-
-        Info()
-        Console.ForegroundColor = ConsoleColor.Yellow
-        Console.Write(vbTab & vbTab & "コ型3 (D16): ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp <> 0 Or temp <> 1 Then
-            Do Until temp = 0 Or temp = 1
-                Info()
-                Console.ForegroundColor = ConsoleColor.Yellow
-                Console.Write(vbTab & vbTab & "コ型3 (D16): ")
-                Console.ForegroundColor = ConsoleColor.Red
-                temp = Val(Console.ReadLine)
-            Loop
-        End If
-        If temp = 1 Then
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "右(750×460×460×350) ")
-            Console.ForegroundColor = ConsoleColor.Magenta
-            Console.Write("[3.3]: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("X191").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = "（コノ字３右）"
-                xlApp.Range("AH191").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = "750×460×460×350"
-                xlApp.Range("CM191").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = 3.3
-                xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-                xlApp.Range("BA191").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "左(750×460×460×350) ")
-            Console.ForegroundColor = ConsoleColor.Magenta
-            Console.Write("[3.3]: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("X196").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = "（コノ字３左）"
-                xlApp.Range("AH196").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = "750×460×460×350"
-                xlApp.Range("CM196").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = 3.3
-                xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-                xlApp.Range("BA196").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-        End If
-        Info()
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & vbTab & "M型 (D16[350×460×460×350]) ")
-        Console.ForegroundColor = ConsoleColor.Magenta
-        Console.Write("[2.7]: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("AH195").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = "350×460×460×350"
-            xlApp.Range("CM195").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = 2.7
-            xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-            xlApp.Range("BA195").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Info()
-        Console.ForegroundColor = ConsoleColor.Yellow
-        Console.WriteLine(vbTab & vbTab & "フック (D10)")
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "695×160 ")
-        Console.ForegroundColor = ConsoleColor.Magenta
-        Console.Write("[0.6]: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("AH192").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = "695×160　　フック付"
-            xlApp.Range("CM192").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = 0.6
-            xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-            xlApp.Range("BA192").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "595×160 ")
-        Console.ForegroundColor = ConsoleColor.Magenta
-        Console.Write("[0.5]: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("AH193").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = "595×160　　フック付"
-            xlApp.Range("CM193").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = 0.5
-            xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-            xlApp.Range("BA193").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "160×160 ")
-        Console.ForegroundColor = ConsoleColor.Magenta
-        Console.Write("[0.3]: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("AH194").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = "160×160　　フック付"
-            xlApp.Range("CM194").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = 0.3
-            xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
-            xlApp.Range("BA194").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "435×250: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA185").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Info()
-        Console.ForegroundColor = ConsoleColor.Yellow
-        Console.Write(vbTab & vbTab & "主筋補強 (D10): ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp <> 0 Or temp <> 1 Then
-            Do Until temp = 0 Or temp = 1
-                Info()
-                Console.ForegroundColor = ConsoleColor.Yellow
-                Console.Write(vbTab & vbTab & "主筋補強 (D10): ")
-                Console.ForegroundColor = ConsoleColor.Red
-                temp = Val(Console.ReadLine)
-            Loop
-        End If
-        If temp = 1 Then
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "2500: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA202").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "2000: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA203").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-        End If
-        Info()
-        Console.ForegroundColor = ConsoleColor.Yellow
-        Console.Write(vbTab & vbTab & "スラブ曲 (D13): ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp <> 0 Or temp <> 1 Then
-            Do Until temp = 0 Or temp = 1
-                Info()
-                Console.ForegroundColor = ConsoleColor.Yellow
-                Console.Write(vbTab & vbTab & "スラブ曲 (D13): ")
-                Console.ForegroundColor = ConsoleColor.Red
-                temp = Val(Console.ReadLine)
-            Loop
-        End If
-        If temp = 1 Then
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×5250: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA115").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×4750: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA116").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×4250: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA117").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×3750: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA118").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×3250: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA119").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×2750: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA120").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×2250: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA121").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×1750: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA122").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×1250: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA123").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250× 750: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA124").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-        End If
-        Info()
-        Console.ForegroundColor = ConsoleColor.Yellow
-        Console.WriteLine(vbTab & vbTab & "スラブ直 (D13)")
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "5500: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA125").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "5000: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA126").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "4500: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA127").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "4000: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA128").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "3500: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA129").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "3000: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA130").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "2500: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA131").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "2000: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA132").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "1500: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA133").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "1200: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA134").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & "1000: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA135").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Console.ForegroundColor = ConsoleColor.Cyan
-        Console.Write(vbTab & " 900: ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp > 0 Then
-            xlApp.Range("BA136").Activate()
-            xlApp.ActiveCell.FormulaR1C1 = temp
-        End If
-        Info()
-        Console.ForegroundColor = ConsoleColor.Yellow
-        Console.Write(vbTab & vbTab & "スラブ補強曲 (D10): ")
-        Console.ForegroundColor = ConsoleColor.White
-        temp = Val(Console.ReadLine)
-        If temp <> 0 Or temp <> 1 Then
-            Do Until temp = 0 Or temp = 1
-                Info()
-                Console.ForegroundColor = ConsoleColor.Yellow
-                Console.Write(vbTab & vbTab & "スラブ補強曲 (D10): ")
-                Console.ForegroundColor = ConsoleColor.Red
-                temp = Val(Console.ReadLine)
-            Loop
-        End If
-        If temp = 1 Then
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×5250: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA137").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×4750: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA138").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×4250: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA139").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×3750: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA140").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×3250: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA141").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×2750: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA142").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×2250: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA143").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×1750: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA144").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250×1250: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA145").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-            Console.ForegroundColor = ConsoleColor.Cyan
-            Console.Write(vbTab & "250× 750: ")
-            Console.ForegroundColor = ConsoleColor.White
-            temp = Val(Console.ReadLine)
-            If temp > 0 Then
-                xlApp.Range("BA146").Activate()
-                xlApp.ActiveCell.FormulaR1C1 = temp
-            End If
-        End If
         Info()
         Console.ForegroundColor = ConsoleColor.Yellow
         Console.Write(vbTab & vbTab & "スラブ補強直 (D10): ")
@@ -906,6 +228,7 @@ Public Module ModuleMain
         xlApp.ActiveCell.FormulaR1C1 = 3
         xlApp.Range("BA159").Activate()
         xlApp.ActiveCell.FormulaR1C1 = 3
+
         Info()
         Console.ForegroundColor = ConsoleColor.Cyan
         Console.Write(vbTab & vbTab & "スリーブ: ")
@@ -923,6 +246,7 @@ Public Module ModuleMain
             xlApp.Range("BA201").Activate()
             xlApp.ActiveCell.FormulaR1C1 = temp
         End If
+
         Info()
         Console.ForegroundColor = ConsoleColor.Yellow
         Console.WriteLine(vbTab & vbTab & "副資材リスト")

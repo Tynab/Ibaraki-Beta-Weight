@@ -104,64 +104,30 @@ Friend Module Common
     ''' Yes/No question (1/0).
     ''' </summary>
     ''' <param name="caption">Caption.</param>
-    Friend Function YSQ(caption As String)
+    ''' <returns>Answer value.</returns>
+    Friend Function YNQ(caption As String)
         PrefWarn(caption)
         ForegroundColor = White
-        Dim vu = Val(ReadLine)
-        If vu <> 0 Or vu <> 1 Then
-            Do Until vu = 0 Or vu = 1
+        Dim value = Val(ReadLine)
+        If value <> 0 Or value <> 1 Then
+            Do Until value = 0 Or value = 1
                 PrefWarn(caption)
                 ForegroundColor = Red
-                vu = Val(ReadLine)
+                value = Val(ReadLine)
             Loop
         End If
-        Return vu
+        Return value
     End Function
-
-    ''' <summary>
-    ''' Redirect value to excel.
-    ''' </summary>
-    ''' <param name="xlApp">Excel application.</param>
-    ''' <param name="caption">Caption.</param>
-    ''' <param name="cell">Cell address.</param>
-    Friend Sub RdrVal(xlApp As Microsoft.Office.Interop.Excel.Application, caption As String, cell As String)
-        ForegroundColor = Cyan
-        Write(vbTab & caption)
-        ForegroundColor = White
-        Dim value = Val(ReadLine)
-        If value > 0 Then
-            DctVal(xlApp, cell, value)
-        End If
-    End Sub
-
-    ''' <summary>
-    ''' Redirect value with detail to excel.
-    ''' </summary>
-    ''' <param name="xlApp">Excel application.</param>
-    ''' <param name="caption">Caption.</param>
-    ''' <param name="detail">Detail.</param>
-    ''' <param name="cell">Cell address.</param>
-    'Friend Sub RdrValDtl(xlApp As Microsoft.Office.Interop.Excel.Application, caption As String, detail As String, cell As String)
-    '    ForegroundColor = Cyan
-    '    Write(vbTab & caption)
-    '    ForegroundColor = Magenta
-    '    Write(detail)
-    '    ForegroundColor = White
-    '    Dim value = Val(ReadLine)
-    '    If value > 0 Then
-    '        DctVal(xlApp, cell, value)
-    '    End If
-    'End Sub
 
     ''' <summary>
     ''' Direct value to excel.
     ''' </summary>
     ''' <param name="xlApp">Excel application.</param>
     ''' <param name="cell">Cell address.</param>
-    ''' <param name="vu">Value.</param>
-    Friend Sub DctVal(xlApp As Microsoft.Office.Interop.Excel.Application, cell As String, vu As Object)
+    ''' <param name="value">Value.</param>
+    Friend Sub DctVal(xlApp As Microsoft.Office.Interop.Excel.Application, cell As String, value As Object)
         xlApp.Range(cell).Activate()
-        xlApp.ActiveCell.FormulaR1C1 = vu
+        xlApp.ActiveCell.FormulaR1C1 = value
     End Sub
 
     ''' <summary>
@@ -169,10 +135,10 @@ Friend Module Common
     ''' </summary>
     ''' <param name="xlApp">Excel application.</param>
     ''' <param name="cell">Cell address.</param>
-    ''' <param name="vu">Value.</param>
-    Friend Sub ModVal(xlApp As Microsoft.Office.Interop.Excel.Application, cell As String, vu As Object)
+    ''' <param name="value">Value.</param>
+    Friend Sub ModVal(xlApp As Microsoft.Office.Interop.Excel.Application, cell As String, value As Object)
         xlApp.Range(cell).Activate()
-        xlApp.ActiveCell.FormulaR1C1 = vu
+        xlApp.ActiveCell.FormulaR1C1 = value
         xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
     End Sub
 
@@ -187,16 +153,66 @@ Friend Module Common
     End Sub
 
     ''' <summary>
-    ''' Import value to excel.
+    ''' Publish value to excel.
     ''' </summary>
     ''' <param name="xlApp">Excel application.</param>
-    ''' <param name="caption">Caption.</param>
     ''' <param name="cell">Cell address.</param>
-    Friend Sub ImpVal(xlApp As Microsoft.Office.Interop.Excel.Application, caption As String, cell As String)
-        PrefImp(caption)
-        Dim value = Val(ReadLine)
+    ''' <param name="value">Value.</param>
+    Friend Sub PubVal(xlApp As Microsoft.Office.Interop.Excel.Application, cell As String, value As String)
         If value > 0 Then
             DctVal(xlApp, cell, value)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Publish mod value to excel.
+    ''' </summary>
+    ''' <param name="xlApp">Excel application.</param>
+    ''' <param name="row">Row number.</param>
+    ''' <param name="name">Name rebar.</param>
+    ''' <param name="weight">Weight rebar.</param>
+    ''' <param name="number">Number rebar.</param>
+    Friend Sub PubModVal(xlApp As Microsoft.Office.Interop.Excel.Application, row As String, name As String, weight As Double, number As Double)
+        If number > 0 Then
+            DctVal(xlApp, $"AH{row}", name)
+            ModVal(xlApp, $"CM{row}", weight)
+            DctVal(xlApp, $"BA{row}", number)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Publish mod value to excel.
+    ''' </summary>
+    ''' <param name="xlApp">Excel application.</param>
+    ''' <param name="row">Row number.</param>
+    ''' <param name="title">Title rebar.</param>
+    ''' <param name="name">Name rebar.</param>
+    ''' <param name="weight">Weight rebar.</param>
+    ''' <param name="number">Number rebar.</param>
+    Friend Sub PubModValFull(xlApp As Microsoft.Office.Interop.Excel.Application, row As String, title As String, name As String, weight As Double, number As Double)
+        If number > 0 Then
+            DctVal(xlApp, $"X{row}", title)
+            DctVal(xlApp, $"AH{row}", name)
+            ModVal(xlApp, $"CM{row}", weight)
+            DctVal(xlApp, $"BA{row}", number)
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Publish mod value expansion to excel.
+    ''' </summary>
+    ''' <param name="xlApp">Excel application.</param>
+    ''' <param name="row">Row number.</param>
+    ''' <param name="name">Name rebar.</param>
+    ''' <param name="weight">Weight rebar.</param>
+    ''' <param name="price">Price rebar.</param>
+    ''' <param name="number">Number rebar.</param>
+    Friend Sub PubModValExp(xlApp As Microsoft.Office.Interop.Excel.Application, row As String, name As String, weight As Double, price As Double, number As Double)
+        If number > 0 Then
+            DctVal(xlApp, $"AH{row}", name)
+            ModVal(xlApp, $"CM{row}", weight)
+            ModVal(xlApp, $"CQ{row}", price)
+            DctVal(xlApp, $"BA{row}", number)
         End If
     End Sub
 #End Region
@@ -237,46 +253,85 @@ Friend Module Common
     End Sub
 
     ''' <summary>
-    ''' Prefix input.
+    ''' Title desciption.
     ''' </summary>
-    ''' <param name="caption">Caption.</param>
-    Friend Sub PrefInp(caption As String)
-        ForegroundColor = Cyan
-        WriteLine(vbTab & vbTab & caption)
+    ''' <param name="description">Description.</param>
+    Friend Sub TitDecs(description As String)
+        ForegroundColor = Magenta
+        Write(description)
         ForegroundColor = White
     End Sub
 
     ''' <summary>
-    ''' Prefix input RIP.
+    ''' Detail input.
     ''' </summary>
     ''' <param name="caption">Caption.</param>
-    'Friend Sub PrefInpRip(caption As String)
-    '    ForegroundColor = Cyan
-    '    WriteLine(vbTab & caption)
-    '    ForegroundColor = White
-    'End Sub
+    ''' <returns>Input value.</returns>
+    Friend Function DtlInp(caption As String)
+        ForegroundColor = Cyan
+        Write(vbTab & vbTab & caption)
+        ForegroundColor = White
+        Return Val(ReadLine)
+    End Function
 
     ''' <summary>
-    ''' Prefix input detail.
+    ''' Detail input RIP.
     ''' </summary>
     ''' <param name="caption">Caption.</param>
-    ''' <param name="detail">Detail.</param>
-    Friend Sub PrefInpDtl(caption As String, detail As String)
+    ''' <returns>Input value.</returns>
+    Friend Function DtlInpRip(caption As String)
         ForegroundColor = Cyan
         Write(vbTab & caption)
-        ForegroundColor = Magenta
-        Write(detail)
         ForegroundColor = White
-    End Sub
+        Return Val(ReadLine)
+    End Function
 
     ''' <summary>
-    ''' Prefix import.
+    ''' Detail input description.
     ''' </summary>
     ''' <param name="caption">Caption.</param>
-    Friend Sub PrefImp(caption As String)
+    ''' <param name="description">Description.</param>
+    ''' <returns>Input value.</returns>
+    Friend Function DtlInpDtl(caption As String, description As String)
+        ForegroundColor = Cyan
+        Write(vbTab & vbTab & caption)
+        TitDecs(description)
+        Return Val(ReadLine)
+    End Function
+
+    ''' <summary>
+    ''' Detail input RIP description.
+    ''' </summary>
+    ''' <param name="caption">Caption.</param>
+    ''' <param name="description">Description.</param>
+    ''' <returns>Input value.</returns>
+    Friend Function DtlInpRipDesc(caption As String, description As String)
+        ForegroundColor = Cyan
+        Write(vbTab & caption)
+        TitDecs(description)
+        Return Val(ReadLine)
+    End Function
+
+    ''' <summary>
+    ''' Header input.
+    ''' </summary>
+    ''' <param name="caption">Caption.</param>
+    ''' <returns>Input value.</returns>
+    Friend Function HdrInp(caption As String)
         Info()
-        PrefInp(caption)
-    End Sub
+        Return DtlInp(caption)
+    End Function
+
+    ''' <summary>
+    ''' Header input description.
+    ''' </summary>
+    ''' <param name="caption">Caption.</param>
+    ''' <param name="description">Description.</param>
+    ''' <returns>Input value.</returns>
+    Friend Function HdrInpDesc(caption As String, description As String)
+        Info()
+        Return DtlInpDtl(caption, description)
+    End Function
 
     ''' <summary>
     ''' Prefix warning.

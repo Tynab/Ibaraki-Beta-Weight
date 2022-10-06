@@ -65,6 +65,60 @@ Namespace My
                 Me("Chk_Key") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("114")>  _
+        Public ReadOnly Property Pr_D10() As Double
+            Get
+                Return CType(Me("Pr_D10"),Double)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("112")>  _
+        Public ReadOnly Property Pr_D13() As Double
+            Get
+                Return CType(Me("Pr_D13"),Double)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("110")>  _
+        Public ReadOnly Property Pr_D16() As Double
+            Get
+                Return CType(Me("Pr_D16"),Double)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("112")>  _
+        Public ReadOnly Property Pr_D19() As Double
+            Get
+                Return CType(Me("Pr_D19"),Double)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("112")>  _
+        Public ReadOnly Property Pr_D22() As Double
+            Get
+                Return CType(Me("Pr_D22"),Double)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("129")>  _
+        Public ReadOnly Property Pr_Proc() As Double
+            Get
+                Return CType(Me("Pr_Proc"),Double)
+            End Get
+        End Property
     End Class
 End Namespace
 
