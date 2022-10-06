@@ -22,44 +22,26 @@ Public Module ModuleMain
         'Dim temp As New UShort
         Dim t As String
 
-        ' 2t
-        Dim is2t = YNQ("運賃(2トン車): ")
-        If is2t = 1 Then
-            DctVal(xlApp, "BA241", is2t)
-        End If
-        ' GL-150
+        ' Fare
+        Fare(xlApp, YNQ("運賃(2トン車): "))
+        ' Unit GL-150
         PrefWarn("外周/内周GL-150")
-        GL50(xlApp)
-        ' GL-300
-        If YNQ("外周深GL-300: ") = 1 Then
-            GL300(xlApp)
-        End If
-        ' GL-300/+30
-        If YNQ("外周深GL-300/+30: ") = 1 Then
-            GL300Cut(xlApp)
-        End If
-        ' GL-400
-        If YNQ("外周深GL-400: ") = 1 Then
-            GL400(xlApp)
-        End If
-        ' GL-400/+30
-        If YNQ("外周深GL-400/+30: ") = 1 Then
-            GL400Cut(xlApp)
-        End If
-        ' Garage GL-300
-        If YNQ("ガレージ外周GL-300: ") = 1 Then
-            GL300Gar(xlApp)
-        End If
+        Unit150(xlApp)
+        ' Unit GL-300
+        Unit300(xlApp, YNQ("外周深GL-300: "))
+        ' Unit GL-300/+30
+        Unit300Cut(xlApp, YNQ("外周深GL-300/+30: "))
+        ' Unit GL-400
+        Unit400(xlApp, YNQ("外周深GL-400: "))
+        ' Unit GL-400/+30
+        Unit400Cut(xlApp, YNQ("外周深GL-400/+30: "))
+        ' Unit Garage GL-300
+        Unit300Gar(xlApp, YNQ("ガレージ外周GL-300: "))
         ' Slab unit
         PrefWarn("スラブユニット")
         SlabUnit(xlApp)
-        ' Electric water
-        Dim elecWtr = HdrInp("電気温水器: ")
-        If elecWtr > 0 Then
-            DctVal(xlApp, "BA107", elecWtr)
-        Else
-            ClrVal(xlApp, "BA107")
-        End If
+        ' Electric water heater
+        ElecWtrHtr(xlApp, HdrInp("電気温水器: "))
         ' Corner joint
         PrefWarn("コーナー")
         JtCor(xlApp)
@@ -67,64 +49,39 @@ Public Module ModuleMain
         PrefWarn("ストレート")
         JtStr(xlApp)
         ' Cap tire
-        If YNQ("キャップタイヤ (320): ") = 1 Then
-            CapTire(xlApp)
-        End If
+        CapTire(xlApp, YNQ("キャップタイヤ (320): "))
         ' Edge
         PubVal(xlApp, "BA180", HdrInp("端部(700×350): "))
         ' Long corner
-        If YNQ("ロングコーナー (D16): ") = 1 Then
-            LongCor(xlApp)
-        End If
+        LongCor(xlApp, YNQ("ロングコーナー (D16): "))
         ' Crank
-        If YNQ("クランク: ") = 1 Then
-            Crank(xlApp)
-        End If
+        Crank(xlApp, YNQ("クランク: "))
         ' Island
-        If YNQ("島 (D16): ") = 1 Then
-            Island(xlApp)
-        End If
+        Island(xlApp, YNQ("島 (D16): "))
         ' Straight
-        If YNQ("ストレート (D16): ") = 1 Then
-            Straight(xlApp)
-        End If
+        Straight(xlApp, YNQ("ストレート (D16): "))
         ' Haunch
         PubVal(xlApp, "BA180", HdrInp("ハンチ (D16[660×410×660]): "))
         ' Corner 3
-        If YNQ("コーナー3 (D16): ") = 1 Then
-            Corner3(xlApp)
-        End If
+        Corner3(xlApp, YNQ("コーナー3 (D16): "))
         ' Crank 3
-        If YNQ("クランク3 (D16): ") = 1 Then
-            Crank3(xlApp)
-        End If
+        Crank3(xlApp, YNQ("クランク3 (D16): "))
         ' U type 3
-        If YNQ("コ型3 (D16): ") = 1 Then
-            UType3(xlApp)
-        End If
+        UType3(xlApp, YNQ("コ型3 (D16): "))
         ' M type
         PubModVal(xlApp, "195", "350×460×460×350", 2.7, HdrInpDesc("M型 (D16[350×460×460×350]) ", "[2.7]: "))
         ' hook
         PrefWarn("フック (D10)")
-        PubModVal(xlApp, "192", "695×160　　フック付", 0.6, DtlInpRipDesc("695×160 ", "[0.6]: "))
-        PubModVal(xlApp, "193", "595×160　　フック付", 0.5, DtlInpRipDesc("595×160 ", "[0.5]: "))
-        PubModVal(xlApp, "194", "160×160　　フック付", 0.3, DtlInpRipDesc("160×160 ", "[0.3]: "))
-        PubVal(xlApp, "BA185", DtlInpRip("435×250: "))
+        Hook(xlApp)
         ' Main reinforcement
-        If YNQ("主筋補強 (D10): ") = 1 Then
-            MainReinf(xlApp)
-        End If
+        MainReinf(xlApp, YNQ("主筋補強 (D10): "))
         ' Bending
-        If YNQ("スラブ曲 (D13): ") = 1 Then
-            SlabBndg(xlApp)
-        End If
+        SlabBndg(xlApp, YNQ("スラブ曲 (D13): "))
         ' Slab straight
         PrefWarn("スラブ直 (D13)")
         SlabStr(xlApp)
         ' Slab reinforcement bending
-        If YNQ("スラブ補強曲 (D10): ") = 1 Then
-            SlabReinfBndg(xlApp)
-        End If
+        SlabReinfBndg(xlApp, YNQ("スラブ補強曲 (D10): "))
 
         Info()
         Console.ForegroundColor = ConsoleColor.Yellow
