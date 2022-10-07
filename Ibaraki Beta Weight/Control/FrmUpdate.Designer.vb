@@ -89,7 +89,7 @@ Partial Class FrmUpdate
         Me.lblText.Name = "lblText"
         Me.lblText.Size = New System.Drawing.Size(360, 45)
         Me.lblText.TabIndex = 0
-        Me.lblText.Text = "Đang cập nhật..."
+        Me.lblText.Text = "Updating..."
         Me.lblText.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'picUpdating
