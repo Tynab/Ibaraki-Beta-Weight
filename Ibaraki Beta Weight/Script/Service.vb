@@ -1,23 +1,11 @@
-﻿Imports System.Diagnostics.Process
-Imports System.Windows.Forms
+﻿Imports Microsoft.Office.Interop.Excel
 
 Friend Module Service
     ''' <summary>
     ''' Weight Ibaraki Beta.
     ''' </summary>
-    Friend Sub WtIbarakiBeta()
-        ChkUpd()
-        KillPrcs(XL_NAME)
-        ' Open form excel
-        Dim xlApp As New Microsoft.Office.Interop.Excel.Application
-        Dim ofd As New OpenFileDialog With {
-            .Multiselect = False,
-            .Title = "Open Excel Document",
-            .Filter = "Excel Document|*.xlsx;*.xls"
-        }
-        ofd.ShowDialog()
-        Dim filePath = ofd.FileName
-        xlApp.Workbooks.Open(filePath)
+    ''' <param name="xlApp">Excel Application.</param>
+    Friend Sub WtIbarakiBeta(xlApp As Application)
         ' Fare
         Fare(xlApp, HdrYNQ(vbTab & vbTab & "運賃(2トン車): "))
         ' Unit GL-150
@@ -87,8 +75,5 @@ Friend Module Service
         ' Parts
         PrefWarn(vbTab & vbTab & "副資材リスト")
         Parts(xlApp)
-        ' Save form
-        xlApp.ActiveWorkbook.Close(SaveChanges:=True)
-        Start(filePath)
     End Sub
 End Module

@@ -79,7 +79,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 20.8.4.
+        '''  Looks up a localized string similar to 22.10.7.
         '''</summary>
         Friend ReadOnly Property app_ver() As String
             Get
@@ -154,7 +154,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to https://pastebin.com/raw/XTwJskg2.
+        '''  Looks up a localized string similar to https://raw.githubusercontent.com/Tynab/Tynab/main/app/Ibaraki%20Beta%20Weight.
         '''</summary>
         Friend ReadOnly Property link_app() As String
             Get
@@ -172,7 +172,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to https://pastebin.com/raw/Eb6en24p.
+        '''  Looks up a localized string similar to https://raw.githubusercontent.com/Tynab/Tynab/main/ver/Ibaraki%20Beta%20Weight.
         '''</summary>
         Friend ReadOnly Property link_ver() As String
             Get

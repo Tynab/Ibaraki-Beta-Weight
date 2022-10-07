@@ -9,14 +9,13 @@ Public Module ModuleMain
     Public Sub Main()
         OutputEncoding = UTF8
         If Not My.Settings.Chk_Key Then
-            If InputBox("Enter Serial", "License key") = My.Resources.key_ser Then
+            If InputBox("シリアルを入力", "ライセンスキー") = My.Resources.key_ser Then
                 UpdVldLic()
                 RunApp()
             Else
                 ForegroundColor = Red
-                Write("Wrong license. Press any key to exit...")
+                Write("ライセンスが間違っています。 終了するには、任意のキーを押してください...")
                 ReadKey()
-                Environment.Exit(0)
             End If
         Else
             RunApp()

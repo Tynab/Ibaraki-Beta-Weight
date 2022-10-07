@@ -126,7 +126,7 @@
     <comment>tên thật phần mềm</comment>
   </data>
   <data name="app_ver" xml:space="preserve">
-    <value>20.8.4</value>
+    <value>22.10.7</value>
     <comment>phiên bản phần mềm</comment>
   </data>
   <data name="cc_text" xml:space="preserve">
@@ -156,7 +156,7 @@
     <comment>số seri</comment>
   </data>
   <data name="link_app" xml:space="preserve">
-    <value>https://pastebin.com/raw/XTwJskg2</value>
+    <value>https://raw.githubusercontent.com/Tynab/Tynab/main/app/Ibaraki%20Beta%20Weight</value>
     <comment>đường dẫn tải phần mềm trên pastebin</comment>
   </data>
   <data name="link_base" xml:space="preserve">
@@ -164,7 +164,7 @@
     <comment>đường dẫn cơ bản</comment>
   </data>
   <data name="link_ver" xml:space="preserve">
-    <value>https://pastebin.com/raw/Eb6en24p</value>
+    <value>https://raw.githubusercontent.com/Tynab/Tynab/main/ver/Ibaraki%20Beta%20Weight</value>
     <comment>đường dẫn kiểm tra phiên bản trên pastebin</comment>
   </data>
 </root>

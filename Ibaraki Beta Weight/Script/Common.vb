@@ -35,7 +35,7 @@ Friend Module Common
     ''' </summary>
     Friend Sub ChkUpd()
         If IsNetAvail() AndAlso Not (New WebClient).DownloadString(My.Resources.link_ver).Contains(My.Resources.app_ver) Then
-            Show($"A newer version of the {My.Resources.app_name} is available to download.", "Update", OK, Information)
+            Show($"「{My.Resources.app_true_name}」新しいバージョンが利用可能！", "更新", OK, Information)
             Run(New FrmUpdate)
         End If
     End Sub
@@ -91,9 +91,23 @@ Friend Module Common
     ''' </summary>
     Friend Sub RunApp()
         ForegroundColor = Yellow
-        Write("WARNING: Close all excel before use this application! Press Enter to continue...")
+        Write("警告：このアプリケーションを使用する前に、すべての「エクセル」を閉じてください。「エンター」キーを押して続行します...")
         ReadLine()
-        WtIbarakiBeta()
+        ChkUpd()
+        KillPrcs(XL_NAME)
+        Dim xlApp As New Microsoft.Office.Interop.Excel.Application
+        Dim ofd As New OpenFileDialog With {
+            .Multiselect = False,
+            .Title = "「エクセル」ドキュメントを開く",
+            .Filter = "「エクセル」ドキュメント|*.xlsx;*.xls"
+        }
+        If ofd.ShowDialog() = DialogResult.OK Then
+            Dim filePath = ofd.FileName
+            xlApp.Workbooks.Open(filePath)
+            WtIbarakiBeta(xlApp)
+            xlApp.ActiveWorkbook.Close(SaveChanges:=True)
+            Process.Start(filePath)
+        End If
     End Sub
 #End Region
 
@@ -296,7 +310,7 @@ Friend Module Common
         WriteLine(My.Resources.gr_name)
         WriteLine(My.Resources.cc_text)
         ForegroundColor = Green
-        WriteLine(vbCrLf & My.Resources.app_true_name)
+        WriteLine(vbCrLf & My.Resources.app_true_name & vbCrLf)
     End Sub
 
     ''' <summary>
