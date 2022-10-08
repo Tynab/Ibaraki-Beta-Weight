@@ -135,7 +135,7 @@ Partial Class FrmUpdate
         Me.Opacity = 0R
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
-        Me.Text = "Updating..."
+        Me.Text = "更新中..."
         Me.TopMost = True
         Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
         Me.pnlMain.ResumeLayout(False)

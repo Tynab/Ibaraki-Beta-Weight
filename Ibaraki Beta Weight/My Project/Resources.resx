@@ -145,12 +145,6 @@
   <data name="gUpdating" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\gUpdating.gif;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="ic" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\ic.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="iUpdate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\iUpdate.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="key_ser" xml:space="preserve">
     <value>WUFOIOiMqOWfjiAo44OZ44K/KSDph43ph48=</value>
     <comment>số seri</comment>
