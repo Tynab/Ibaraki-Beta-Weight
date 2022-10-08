@@ -11,6 +11,7 @@ Public Class FrmUpdate
 #Region "Events"
     ' Form shown
     Private Sub FrmUpdate_Shown(sender As Object, e As EventArgs) Handles MyBase.Shown
+        pnlProgressBar.Width = 1
         FIFrm()
         CrtDirAdv(FRNT_PATH)
         DelFileAdv(FILE_SETUP_ADR)

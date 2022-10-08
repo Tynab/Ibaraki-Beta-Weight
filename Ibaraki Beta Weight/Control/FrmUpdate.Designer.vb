@@ -82,14 +82,14 @@ Partial Class FrmUpdate
         '
         Me.lblText.BackColor = System.Drawing.Color.Transparent
         Me.lblText.Dock = System.Windows.Forms.DockStyle.Top
-        Me.lblText.Font = New System.Drawing.Font("Verdana", 13.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblText.Font = New System.Drawing.Font("Yu Gothic", 13.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblText.ForeColor = System.Drawing.Color.Gray
         Me.lblText.Location = New System.Drawing.Point(0, 170)
         Me.lblText.Margin = New System.Windows.Forms.Padding(0)
         Me.lblText.Name = "lblText"
         Me.lblText.Size = New System.Drawing.Size(360, 45)
         Me.lblText.TabIndex = 0
-        Me.lblText.Text = "Updating..."
+        Me.lblText.Text = "更新中..."
         Me.lblText.TextAlign = System.Drawing.ContentAlignment.TopCenter
         '
         'picUpdating
@@ -134,7 +134,7 @@ Partial Class FrmUpdate
         Me.Name = "FrmUpdate"
         Me.Opacity = 0R
         Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Updating..."
         Me.TopMost = True
         Me.TransparencyKey = System.Drawing.Color.FromArgb(CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
