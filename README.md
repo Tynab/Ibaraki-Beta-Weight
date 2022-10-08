@@ -3,5 +3,5 @@
 
 ## DEMO IMAGE
 <p align="center">
-<img src="https://raw.githubusercontent.com/Nohit-Java17/Jira-Project/main/pic/0.png"></img>
+<img src="https://raw.githubusercontent.com/Tynab/Ibaraki-Beta-Weight/main/pic/0.jpg"></img>
 </p>
