@@ -253,7 +253,7 @@ Friend Module Util
     ''' </summary>
     ''' <param name="xlApp">Excel Application.</param>
     ''' <param name="choosen">Selection.</param>
-    Friend Sub Corner3(xlApp As Application, choosen As Double)
+    Friend Sub Corner3d(xlApp As Application, choosen As Double)
         If choosen = 1 Then
             PubDVal(xlApp, "BA166", DtlDInp(vbTab & "右(750×460×350)" & vbTab & vbTab & ": "))
             PubDVal(xlApp, "BA168", DtlDInp(vbTab & "左(750×460×350)" & vbTab & vbTab & ": "))
@@ -267,7 +267,7 @@ Friend Module Util
     ''' </summary>
     ''' <param name="xlApp">Excel Application.</param>
     ''' <param name="choosen">Selection.</param>
-    Friend Sub Crank3(xlApp As Application, choosen As Double)
+    Friend Sub Crank3d(xlApp As Application, choosen As Double)
         If choosen = 1 Then
             PubDModVal(xlApp, "189", "（クランク３右）", "750×460×460×350", 3.3, DtlDInpDesc(vbTab & "右(750×460×460×350) ", "[3.3]"))
             PubDModVal(xlApp, "188", "（クランク３左）", "750×460×460×350", 3.3, DtlDInpDesc(vbTab & "左(750×460×460×350) ", "[3.3]"))
@@ -279,7 +279,7 @@ Friend Module Util
     ''' </summary>
     ''' <param name="xlApp">Excel Application.</param>
     ''' <param name="choosen">Selection.</param>
-    Friend Sub UType3(xlApp As Application, choosen As Double)
+    Friend Sub UType3d(xlApp As Application, choosen As Double)
         If choosen = 1 Then
             PubDModVal(xlApp, "191", "（コノ字３右）", "750×460×460×350", 3.3, DtlDInpDesc(vbTab & "右(750×460×460×350) ", "[3.3]"))
             PubDModVal(xlApp, "196", "（コノ字３左）", "750×460×460×350", 3.3, DtlDInpDesc(vbTab & "左(750×460×460×350) ", "[3.3]"))

@@ -48,12 +48,12 @@ Friend Module Service
         Straight(xlApp, HdrYNQ(vbTab & vbTab & "ストレート (D16): "))
         ' Haunch
         PubDVal(xlApp, "BA180", HdrDInp(vbTab & vbTab & "ハンチ (D16[660×410×660]): "))
-        ' Corner 3
-        Corner3(xlApp, HdrYNQ(vbTab & vbTab & "コーナー3 (D16): "))
-        ' Crank 3
-        Crank3(xlApp, HdrYNQ(vbTab & vbTab & "クランク3 (D16): "))
-        ' U type 3
-        UType3(xlApp, HdrYNQ(vbTab & vbTab & "コ型3 (D16): "))
+        ' Corner 3D
+        Corner3d(xlApp, HdrYNQ(vbTab & vbTab & "コーナー3 (D16): "))
+        ' Crank 3D
+        Crank3d(xlApp, HdrYNQ(vbTab & vbTab & "クランク3 (D16): "))
+        ' U type 3D
+        UType3d(xlApp, HdrYNQ(vbTab & vbTab & "コ型3 (D16): "))
         ' M type
         PubDModVal(xlApp, "195", "350×460×460×350", 2.7, HdrDInpDesc(vbTab & vbTab & "Ｍ型 (D16[350×460×460×350]) ", "[2.7]"))
         ' hook
