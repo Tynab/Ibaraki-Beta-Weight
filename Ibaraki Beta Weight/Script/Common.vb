@@ -33,7 +33,7 @@ Friend Module Common
     ''' <summary>
     ''' Check update.
     ''' </summary>
-    Friend Sub ChkUpd()
+    Private Sub ChkUpd()
         If IsNetAvail() AndAlso Not (New WebClient).DownloadString(My.Resources.link_ver).Contains(My.Resources.app_ver) Then
             Show($"「{My.Resources.app_true_name}」新しいバージョンが利用可能！", "更新", OK, Information)
             Run(New FrmUpdate)
@@ -78,7 +78,7 @@ Friend Module Common
     ''' End process.
     ''' </summary>
     ''' <param name="name">Process name.</param>
-    Friend Sub KillPrcs(name As String)
+    Private Sub KillPrcs(name As String)
         If GetProcessesByName(name).Count > 0 Then
             For Each item In GetProcessesByName(name)
                 item.Kill()
@@ -187,7 +187,7 @@ Friend Module Common
     ''' <param name="xlApp">Excel application.</param>
     ''' <param name="cell">Cell address.</param>
     ''' <param name="value">Value.</param>
-    Friend Sub ModVal(xlApp As Microsoft.Office.Interop.Excel.Application, cell As String, value As Object)
+    Private Sub ModVal(xlApp As Microsoft.Office.Interop.Excel.Application, cell As String, value As Object)
         xlApp.Range(cell).Activate()
         xlApp.ActiveCell.FormulaR1C1 = value
         xlApp.ActiveCell.Interior.Color = RGB(0, 176, 240)
@@ -304,7 +304,7 @@ Friend Module Common
     ''' <summary>
     ''' Intro.
     ''' </summary>
-    Friend Sub Intro()
+    Private Sub Intro()
         Clear()
         ForegroundColor = Blue
         WriteLine(My.Resources.gr_name)
@@ -317,7 +317,7 @@ Friend Module Common
     ''' Title warning.
     ''' </summary>
     ''' <param name="caption">Caption.</param>
-    Friend Sub TitWarn(caption As String)
+    Private Sub TitWarn(caption As String)
         ForegroundColor = Yellow
         Write(caption)
     End Sub
@@ -326,7 +326,7 @@ Friend Module Common
     ''' Title info.
     ''' </summary>
     ''' <param name="caption">Caption.</param>
-    Friend Sub TitInfo(caption As String)
+    Private Sub TitInfo(caption As String)
         ForegroundColor = Cyan
         Write(caption)
     End Sub
@@ -335,7 +335,7 @@ Friend Module Common
     ''' Title info desciption.
     ''' </summary>
     ''' <param name="description">Description.</param>
-    Friend Sub TitDecs(description As String)
+    Private Sub TitDecs(description As String)
         ForegroundColor = Magenta
         Write(description)
         ForegroundColor = Cyan
@@ -347,7 +347,7 @@ Friend Module Common
     ''' Title info expansion.
     ''' </summary>
     ''' <param name="caption">Caption.</param>
-    Friend Sub TitInfoExp(caption As String)
+    Private Sub TitInfoExp(caption As String)
         TitInfo(caption)
         ForegroundColor = White
     End Sub
@@ -409,7 +409,7 @@ Friend Module Common
     ''' Header string warning description.
     ''' </summary>
     ''' <param name="caption">Caption.</param>
-    Friend Sub HdrWarnDesc(caption As String)
+    Private Sub HdrWarnDesc(caption As String)
         Intro()
         TitWarn(caption)
     End Sub
