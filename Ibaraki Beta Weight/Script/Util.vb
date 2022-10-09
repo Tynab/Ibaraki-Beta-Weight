@@ -240,8 +240,8 @@ Friend Module Util
     ''' <param name="choosen">Selection.</param>
     Friend Sub Straight(xlApp As Application, choosen As Double)
         If choosen = 1 Then
-            PubDModVal(xlApp, "169", "4000", 6.3, My.Settings.Pr_D16, DtlDInpDesc(vbTab & "4000 ", $"[6.3({My.Settings.Pr_D16})]" & vbTab))
-            PubDModVal(xlApp, "170", "3500", 5.5, My.Settings.Pr_D16, DtlDInpDesc(vbTab & "3500 ", $"[5.5({My.Settings.Pr_D16})]" & vbTab))
+            PubDModVal(xlApp, "169", "4000", 6.3, My.Settings.Pr_D16, DtlDInpDesc(vbTab & "4000 ", $"[6.3]" & vbTab))
+            PubDModVal(xlApp, "170", "3500", 5.5, My.Settings.Pr_D16, DtlDInpDesc(vbTab & "3500 ", $"[5.5]" & vbTab))
             PubDVal(xlApp, "BA182", DtlDInp(vbTab & "3000" & vbTab & vbTab & ": "))
             PubDVal(xlApp, "BA183", DtlDInp(vbTab & "2500" & vbTab & vbTab & ": "))
             PubDVal(xlApp, "BA184", DtlDInp(vbTab & "2000" & vbTab & vbTab & ": "))
@@ -255,10 +255,10 @@ Friend Module Util
     ''' <param name="choosen">Selection.</param>
     Friend Sub Corner3d(xlApp As Application, choosen As Double)
         If choosen = 1 Then
-            PubDVal(xlApp, "BA166", DtlDInp(vbTab & "右(750×460×350)" & vbTab & vbTab & ": "))
-            PubDVal(xlApp, "BA168", DtlDInp(vbTab & "左(750×460×350)" & vbTab & vbTab & ": "))
-            PubDModVal(xlApp, "187", "750×240×350", 2.2, DtlDInpDesc(vbTab & "右(750×240×350) ", "[2.2]" & vbTab))
-            PubDModVal(xlApp, "190", "750×240×350", 2.2, DtlDInpDesc(vbTab & "左(750×240×350) ", "[2.2]" & vbTab))
+            PubDVal(xlApp, "BA166", DtlDInp(vbTab & "右 (750×460×350)" & vbTab & ": "))
+            PubDVal(xlApp, "BA168", DtlDInp(vbTab & "左 (750×460×350)" & vbTab & ": "))
+            PubDModVal(xlApp, "187", "750×240×350", 2.2, DtlDInpDesc(vbTab & "右 (750×240×350) ", "[2.2]" & vbTab))
+            PubDModVal(xlApp, "190", "750×240×350", 2.2, DtlDInpDesc(vbTab & "左 (750×240×350) ", "[2.2]" & vbTab))
         End If
     End Sub
 
@@ -269,8 +269,8 @@ Friend Module Util
     ''' <param name="choosen">Selection.</param>
     Friend Sub Crank3d(xlApp As Application, choosen As Double)
         If choosen = 1 Then
-            PubDModVal(xlApp, "189", "（クランク３右）", "750×460×460×350", 3.3, DtlDInpDesc(vbTab & "右(750×460×460×350) ", "[3.3]"))
-            PubDModVal(xlApp, "188", "（クランク３左）", "750×460×460×350", 3.3, DtlDInpDesc(vbTab & "左(750×460×460×350) ", "[3.3]"))
+            PubDModVal(xlApp, "189", "（クランク３右）", "750×460×460×350", 3.3, DtlDInpDesc(vbTab & "右 (750×460×460×350) ", "[3.3]"))
+            PubDModVal(xlApp, "188", "（クランク３左）", "750×460×460×350", 3.3, DtlDInpDesc(vbTab & "左 (750×460×460×350) ", "[3.3]"))
         End If
     End Sub
 
@@ -281,8 +281,8 @@ Friend Module Util
     ''' <param name="choosen">Selection.</param>
     Friend Sub UType3d(xlApp As Application, choosen As Double)
         If choosen = 1 Then
-            PubDModVal(xlApp, "191", "（コノ字３右）", "750×460×460×350", 3.3, DtlDInpDesc(vbTab & "右(750×460×460×350) ", "[3.3]"))
-            PubDModVal(xlApp, "196", "（コノ字３左）", "750×460×460×350", 3.3, DtlDInpDesc(vbTab & "左(750×460×460×350) ", "[3.3]"))
+            PubDModVal(xlApp, "191", "（コノ字３右）", "750×460×460×350", 3.3, DtlDInpDesc(vbTab & "右 (750×460×460×350) ", "[3.3]"))
+            PubDModVal(xlApp, "196", "（コノ字３左）", "750×460×460×350", 3.3, DtlDInpDesc(vbTab & "左 (750×460×460×350) ", "[3.3]"))
         End If
     End Sub
 
@@ -386,9 +386,9 @@ Friend Module Util
             PubDVal(xlApp, "BA155", DtlDInp(vbTab & "1500: "))
             PubDVal(xlApp, "BA156", DtlDInp(vbTab & "1000: "))
         End If
-        DctVal(xlApp, "BA157", 2)
-        DctVal(xlApp, "BA158", 3)
-        DctVal(xlApp, "BA159", 3)
+        DctVal(xlApp, "BA157", 2) ' D16
+        DctVal(xlApp, "BA158", 3) ' D13
+        DctVal(xlApp, "BA159", 3) ' D10
     End Sub
 
     ''' <summary>
@@ -417,7 +417,7 @@ Friend Module Util
         PubSVal(xlApp, vbTab & "住所" & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & ": ", "BJ13")
         PubSVal(xlApp, vbTab & "邸名コード" & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & ": ", "AD5")
         PubSVal(xlApp, vbTab & "納品日" & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & ": ", "BO2")
-        Dim ipp = DtlYNQ(vbTab & "運賃(分納)" & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & ": ")
+        Dim ipp = DtlYNQ(vbTab & "運賃 (分納)" & vbTab & vbTab & vbTab & vbTab & vbTab & vbTab & ": ")
         If ipp = 1 Then
             DctVal(xlApp, "BA244", ipp)
         End If
@@ -445,18 +445,21 @@ Friend Module Util
         End If
         PubDVal(xlApp, "BA228", DtlDInp(vbTab & "Ｍ型鉄筋ベース (個)" & vbTab & vbTab & vbTab & vbTab & vbTab & ": "))
         PubDVal(xlApp, "BA229", DtlDInpDesc(vbTab & "樹脂スペーサー改 (ｹｰｽ)", vbTab & vbTab & vbTab & "[300ヶ]" & vbTab & vbTab))
-        PubDVal(xlApp, "BA232", DtlDInpDesc(vbTab & "アンカーボルトセット M18 (ｾｯﾄ)", vbTab & vbTab & "[M18×380]" & vbTab))
+        PubDVal(xlApp, "BA232", DtlDInpDesc(vbTab & "アンカーボルトセット (ｾｯﾄ)", vbTab & vbTab & "[M18×380]" & vbTab))
         PubDVal(xlApp, "BA234", DtlDInpDesc(vbTab & "NSP吊巾止 W160用 (本)", vbTab & vbTab & vbTab & "[200本]" & vbTab & vbTab))
-        PubDVal(xlApp, "BA238", DtlDInpDesc(vbTab & "アンカーボルト M16 (本)", vbTab & vbTab & vbTab & "[M16×415]" & vbTab))
-        PubDVal(xlApp, "BA239", DtlDInpDesc(vbTab & "ホールダウンアンカーボルト M12 (本)", vbTab & "[M12×498]" & vbTab))
+        PubDVal(xlApp, "BA238", DtlDInpDesc(vbTab & "アンカーボルト (本)", vbTab & vbTab & vbTab & "[M16×415]" & vbTab))
+        PubDVal(xlApp, "BA239", DtlDInpDesc(vbTab & "ホールダウンアンカーボルト (本)", vbTab & vbTab & "[M12×498]" & vbTab))
         ' Extend
         PubDVal(xlApp, "BA224", DtlDInpDesc(vbTab & "樹脂スペーサー (個)", vbTab & vbTab & vbTab & "[70×80]" & vbTab & vbTab))
-        PubDVal(xlApp, "BA230", DtlDInpDesc(vbTab & "鉄筋スペーサー60用 (個)", vbTab & vbTab & vbTab & "[60ﾖｳ]" & vbTab & vbTab))
-        PubDVal(xlApp, "BA231", DtlDInpDesc(vbTab & "鉄筋スペーサー80用 (個)", vbTab & vbTab & vbTab & "[80ﾖｳ]" & vbTab & vbTab))
+        PubDVal(xlApp, "BA230", DtlDInpDesc(vbTab & "鉄筋スペーサー (個)", vbTab & vbTab & vbTab & "[60ﾖｳ]" & vbTab & vbTab))
+        PubDVal(xlApp, "BA231", DtlDInpDesc(vbTab & "鉄筋スペーサー (個)", vbTab & vbTab & vbTab & "[80ﾖｳ]" & vbTab & vbTab))
         PubDVal(xlApp, "BA233", DtlDInpDesc(vbTab & "偏心用鉄筋ベース (個)", vbTab & vbTab & vbTab & "[280×160×60]" & vbTab))
         PubDVal(xlApp, "BA235", DtlDInpDesc(vbTab & "防錆巾止め金具 (本)", vbTab & vbTab & vbTab & "[Fﾊﾟﾈﾙ]" & vbTab & vbTab))
-        PubDVal(xlApp, "BA240", DtlDInpDesc(vbTab & "アンカーボルトセットM12 (本)", vbTab & vbTab & "[M12×498]" & vbTab))
-        PubDVal(xlApp, "BA241", DtlDInpDesc(vbTab & "アンカーボルトセットM12軸柱用 (本)", vbTab & "[M12×498]" & vbTab))
+        PubDVal(xlApp, "BA240", DtlDInpDesc(vbTab & "アンカーボルトセット (本)", vbTab & vbTab & "[M12×498]" & vbTab))
+        PubDVal(xlApp, "BA241", DtlDInpDesc(vbTab & "アンカーボルトセット (本)", vbTab & vbTab & "[M12×498]" & vbTab))
         PubDVal(xlApp, "BA242", DtlDInpDesc(vbTab & "Ｕボルト (ｾｯﾄ)", vbTab & vbTab & vbTab & vbTab & "[M8]" & vbTab & vbTab))
     End Sub
+    ' 180
+    ' 186
+    ' 195
 End Module

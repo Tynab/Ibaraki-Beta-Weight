@@ -7,7 +7,7 @@ Friend Module Service
     ''' <param name="xlApp">Excel Application.</param>
     Friend Sub WtIbarakiBeta(xlApp As Application)
         ' Fare
-        Fare(xlApp, HdrYNQ(vbTab & vbTab & "運賃(2トン車): "))
+        Fare(xlApp, HdrYNQ(vbTab & vbTab & "運賃 (2トン車): "))
         ' Unit GL-150
         PrefWarn(vbTab & vbTab & "外周/内周GL-150")
         Unit150(xlApp)
@@ -56,12 +56,12 @@ Friend Module Service
         UType3d(xlApp, HdrYNQ(vbTab & vbTab & "コ型3 (D16): "))
         ' M type
         PubDModVal(xlApp, "195", "350×460×460×350", 2.7, HdrDInpDesc(vbTab & vbTab & "Ｍ型 (D16[350×460×460×350]) ", "[2.7]"))
-        ' hook
+        ' Hook
         PrefWarn(vbTab & vbTab & "フック (D10)")
         Hook(xlApp)
         ' Main reinforcement
         MainReinf(xlApp, HdrYNQ(vbTab & vbTab & "主筋補強 (D10): "))
-        ' Bending
+        ' Slab bending
         SlabBndg(xlApp, HdrYNQ(vbTab & vbTab & "スラブ曲 (D13): "))
         ' Slab straight
         PrefWarn(vbTab & vbTab & "スラブ直 (D13)")
