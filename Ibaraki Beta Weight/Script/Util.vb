@@ -189,6 +189,7 @@ Friend Module Util
     ''' <param name="choosen">Selection.</param>
     Friend Sub CapTire(xlApp As Application, choosen As Double)
         If choosen = 1 Then
+            PubDModVal(xlApp, "186", "（コノ字型）", "680×320×680", 2.7, DtlDInp(vbTab & "D16: "))
             PubDVal(xlApp, "BA181", DtlDInp(vbTab & "D10: "))
         End If
     End Sub
@@ -459,7 +460,4 @@ Friend Module Util
         PubDVal(xlApp, "BA241", DtlDInpDesc(vbTab & "アンカーボルトセット (本)", vbTab & vbTab & "[M12×498]" & vbTab))
         PubDVal(xlApp, "BA242", DtlDInpDesc(vbTab & "Ｕボルト (ｾｯﾄ)", vbTab & vbTab & vbTab & vbTab & "[M8]" & vbTab & vbTab))
     End Sub
-    ' 180
-    ' 186
-    ' 195
 End Module

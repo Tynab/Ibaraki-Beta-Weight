@@ -375,15 +375,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Ibaraki Beta Weight"
-        "ProductCode" = "8:{811972B6-0117-4426-A4CD-B1857136934E}"
-        "PackageCode" = "8:{656604B1-6E49-4B30-89D1-FB223E6B29B3}"
+        "ProductCode" = "8:{C9E590EF-8019-4B22-A39D-E130579E3F27}"
+        "PackageCode" = "8:{06D56D7E-BE26-4EEA-AF8B-89B48655378C}"
         "UpgradeCode" = "8:{D37C0ED8-34A8-4A41-A910-5E8A3E11F029}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:22.10.8"
+        "ProductVersion" = "8:22.10.10"
         "Manufacturer" = "8:Nephilim"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
@@ -935,7 +935,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2DBF917FE1904D919C6599336EEBE343"
             {
-            "SourcePath" = "8:..\\Ibaraki Beta Weight\\obj\\Release\\Ibaraki Beta Weight.exe"
+            "SourcePath" = "8:"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F6774C34560147299276A1BDA695F85D"
