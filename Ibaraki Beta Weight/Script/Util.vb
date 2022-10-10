@@ -2,7 +2,7 @@
 
 Friend Module Util
     ''' <summary>
-    ''' 運賃(2トン車).
+    ''' 運賃 (2トン車).
     ''' </summary>
     ''' <param name="xlApp">Excel Application.</param>
     ''' <param name="choosen">Selection.</param>
