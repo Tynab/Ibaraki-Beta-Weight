@@ -384,7 +384,7 @@
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
         "ProductVersion" = "8:22.10.10"
-        "Manufacturer" = "8:Nephilim"
+        "Manufacturer" = "8:YAN"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
         "Title" = "8:Ibaraki Beta Weight Setup"
@@ -935,7 +935,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_2DBF917FE1904D919C6599336EEBE343"
             {
-            "SourcePath" = "8:..\\Ibaraki Beta Weight\\obj\\Debug\\Ibaraki Beta Weight.exe"
+            "SourcePath" = "8:..\\Ibaraki Beta Weight\\obj\\Release\\Ibaraki Beta Weight.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_F6774C34560147299276A1BDA695F85D"
