@@ -55,7 +55,7 @@ Friend Module Service
         ' U type 3D
         UType3d(xlApp, HdrYNQ(vbTab & vbTab & "コ型3 (D16): "))
         ' M type
-        PubDModVal(xlApp, "195", "350×460×460×350", 2.7, HdrDInpDesc(vbTab & vbTab & "Ｍ型 (D16[350×460×460×350]) ", "[2.7]"))
+        PubDModVal(xlApp, "195", "350×460×460×350", 2.7, HdrDInp(vbTab & vbTab & "Ｍ型 (D16[350×460×460×350]): "))
         ' Hook
         PrefWarn(vbTab & vbTab & "フック (D10)")
         Hook(xlApp)

@@ -395,17 +395,6 @@ Friend Module Common
     End Function
 
     ''' <summary>
-    ''' Header double input description.
-    ''' </summary>
-    ''' <param name="caption">Caption.</param>
-    ''' <param name="description">Description.</param>
-    ''' <returns>Input value.</returns>
-    Friend Function HdrDInpDesc(caption As String, description As String)
-        Intro()
-        Return DtlDInpDesc(caption, description)
-    End Function
-
-    ''' <summary>
     ''' Header string warning description.
     ''' </summary>
     ''' <param name="caption">Caption.</param>

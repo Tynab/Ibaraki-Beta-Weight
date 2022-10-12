@@ -457,7 +457,7 @@ Friend Module Util
         PubDVal(xlApp, "BA233", DtlDInpDesc(vbTab & "偏心用鉄筋ベース (個)", vbTab & vbTab & vbTab & "[280×160×60]" & vbTab))
         PubDVal(xlApp, "BA235", DtlDInpDesc(vbTab & "防錆巾止め金具 (本)", vbTab & vbTab & vbTab & "[Fﾊﾟﾈﾙ]" & vbTab & vbTab))
         PubDVal(xlApp, "BA240", DtlDInpDesc(vbTab & "アンカーボルトセット (本)", vbTab & vbTab & "[M12×498]" & vbTab))
-        PubDVal(xlApp, "BA241", DtlDInpDesc(vbTab & "アンカーボルトセット (本)", vbTab & vbTab & "[M12×498]" & vbTab))
+        PubDVal(xlApp, "BA241", DtlDInpDesc(vbTab & "アンカーボルトセット軸柱用 (本)", vbTab & vbTab & "[M12×498]" & vbTab))
         PubDVal(xlApp, "BA242", DtlDInpDesc(vbTab & "Ｕボルト (ｾｯﾄ)", vbTab & vbTab & vbTab & vbTab & "[M8]" & vbTab & vbTab))
     End Sub
 End Module
