@@ -9,7 +9,7 @@ Friend Module Service
         ' Fare
         Fare(xlApp, HdrYNQ(vbTab & vbTab & "運賃 (2トン車): "))
         ' Unit GL-150
-        PrefWarn(vbTab & vbTab & "外周/内周GL-150")
+        HdrWrng(vbTab & vbTab & "外周/内周GL-150" & vbCrLf)
         Unit150(xlApp)
         ' Unit GL-300
         Unit300(xlApp, HdrYNQ(vbTab & vbTab & "外周深GL-300: "))
@@ -24,15 +24,15 @@ Friend Module Service
         ' Unit Garage GL-300
         Unit300Gar(xlApp, HdrYNQ(vbTab & vbTab & "ガレージ外周GL-300: "))
         ' Slab unit
-        PrefWarn(vbTab & vbTab & "スラブユニット")
+        HdrWrng(vbTab & vbTab & "スラブユニット" & vbCrLf)
         SlabUnit(xlApp)
         ' Electric water heater
         ElecWtrHtr(xlApp, HdrDInp(vbTab & vbTab & "電気温水器: "))
         ' Corner joint
-        PrefWarn(vbTab & vbTab & "コーナー")
+        HdrWrng(vbTab & vbTab & "コーナー" & vbCrLf)
         JtCor(xlApp)
         ' Straight joint
-        PrefWarn(vbTab & vbTab & "ストレート")
+        HdrWrng(vbTab & vbTab & "ストレート" & vbCrLf)
         JtStr(xlApp)
         ' Cap tire
         CapTire(xlApp, HdrYNQ(vbTab & vbTab & "キャップタイヤ (320): "))
@@ -57,14 +57,14 @@ Friend Module Service
         ' M type
         PubDModVal(xlApp, "195", "350×460×460×350", 2.7, HdrDInp(vbTab & vbTab & "Ｍ型 (D16[350×460×460×350]): "))
         ' Hook
-        PrefWarn(vbTab & vbTab & "フック (D10)")
+        HdrWrng(vbTab & vbTab & "フック (D10)" & vbCrLf)
         Hook(xlApp)
         ' Main reinforcement
         MainReinf(xlApp, HdrYNQ(vbTab & vbTab & "主筋補強 (D10): "))
         ' Slab bending
         SlabBndg(xlApp, HdrYNQ(vbTab & vbTab & "スラブ曲 (D13): "))
         ' Slab straight
-        PrefWarn(vbTab & vbTab & "スラブ直 (D13)")
+        HdrWrng(vbTab & vbTab & "スラブ直 (D13)" & vbCrLf)
         SlabStr(xlApp)
         ' Slab reinforcement bending
         SlabReinfBndg(xlApp, HdrYNQ(vbTab & vbTab & "スラブ補強曲 (D10): "))
@@ -73,7 +73,7 @@ Friend Module Service
         ' Sleeve
         Sleeve(xlApp, HdrDInp(vbTab & vbTab & "スリーブ: "))
         ' Parts
-        PrefWarn(vbTab & vbTab & "副資材リスト")
+        HdrWrng(vbTab & vbTab & "副資材リスト" & vbCrLf)
         Parts(xlApp)
     End Sub
 End Module
