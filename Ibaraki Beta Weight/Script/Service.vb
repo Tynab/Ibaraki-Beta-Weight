@@ -46,8 +46,6 @@ Friend Module Service
         Island(xlApp, HdrYNQ(vbTab & vbTab & "島 (D16): "))
         ' Straight
         Straight(xlApp, HdrYNQ(vbTab & vbTab & "ストレート (D16): "))
-        ' Haunch
-        PubDVal(xlApp, "BA180", HdrDInp(vbTab & vbTab & "ハンチ (D16[660×410×660]): "))
         ' Corner 3D
         Corner3d(xlApp, HdrYNQ(vbTab & vbTab & "コーナー3 (D16): "))
         ' Crank 3D

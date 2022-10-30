@@ -150,6 +150,7 @@ Friend Module Util
         PubDVal(xlApp, "BA103", DtlDInp(vbTab & "  2G: "))
         PubDVal(xlApp, "BA104", DtlDInp(vbTab & "1.5G: "))
         PubDVal(xlApp, "BA105", DtlDInp(vbTab & "  1G: "))
+        PubDVal(xlApp, "BA106", DtlDInp(vbTab & "0.5G: "))
     End Sub
 
     ''' <summary>
@@ -449,7 +450,6 @@ Friend Module Util
         PubDVal(xlApp, "BA232", DtlDInpDesc(vbTab & "アンカーボルトセット (ｾｯﾄ)", vbTab & vbTab & "[M18×380]" & vbTab))
         PubDVal(xlApp, "BA234", DtlDInpDesc(vbTab & "NSP吊巾止 W160用 (本)", vbTab & vbTab & vbTab & "[200本]" & vbTab & vbTab))
         PubDVal(xlApp, "BA238", DtlDInpDesc(vbTab & "アンカーボルト (本)", vbTab & vbTab & vbTab & "[M16×415]" & vbTab))
-        PubDVal(xlApp, "BA239", DtlDInpDesc(vbTab & "ホールダウンアンカーボルト (本)", vbTab & vbTab & "[M12×498]" & vbTab))
         ' Extend
         PubDVal(xlApp, "BA224", DtlDInpDesc(vbTab & "樹脂スペーサー (個)", vbTab & vbTab & vbTab & "[70×80]" & vbTab & vbTab))
         PubDVal(xlApp, "BA230", DtlDInpDesc(vbTab & "鉄筋スペーサー (個)", vbTab & vbTab & vbTab & "[60ﾖｳ]" & vbTab & vbTab))
@@ -459,5 +459,6 @@ Friend Module Util
         PubDVal(xlApp, "BA240", DtlDInpDesc(vbTab & "アンカーボルトセット (本)", vbTab & vbTab & "[M12×498]" & vbTab))
         PubDVal(xlApp, "BA241", DtlDInpDesc(vbTab & "アンカーボルトセット軸柱用 (本)", vbTab & vbTab & "[M12×498]" & vbTab))
         PubDVal(xlApp, "BA242", DtlDInpDesc(vbTab & "Ｕボルト (ｾｯﾄ)", vbTab & vbTab & vbTab & vbTab & "[M8]" & vbTab & vbTab))
+        PubDVal(xlApp, "BA239", DtlDInpDesc(vbTab & "アンカーボルト (本)", vbTab & vbTab & vbTab & "[M16×417]" & vbTab))
     End Sub
 End Module
