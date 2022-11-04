@@ -6,7 +6,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2329B329-266A-4451-AF0F-9D51EA2478E8}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <StartupObject>Ibaraki_Beta_Weight.ModuleMain</StartupObject>
+    <StartupObject>Ibaraki_Beta_Weight.Main</StartupObject>
     <RootNamespace>Ibaraki_Beta_Weight</RootNamespace>
     <AssemblyName>Ibaraki Beta Weight</AssemblyName>
     <FileAlignment>512</FileAlignment>
@@ -26,7 +26,7 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>22.11.2.0</ApplicationVersion>
+    <ApplicationVersion>22.11.4.0</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
@@ -118,7 +118,7 @@
     <Compile Include="Control\FrmUpdate.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ModuleMain.vb" />
+    <Compile Include="Script\Main.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
